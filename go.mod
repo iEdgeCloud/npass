@@ -1,4 +1,4 @@
-module github.com/iEdgeCloud/npass
+module github.com/iedgecloud/npass
 
 go 1.22.3
 
