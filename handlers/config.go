@@ -27,9 +27,10 @@ type Config struct {
 }
 
 func GetConfig(ctx iris.Context) {
-    user := ctx.Values().Get(jwt.ConfigKey).(*jwt.Token).Claims.(jwt.MapClaims)
-    userID := int(user["user_id"].(float64))
-    
+    user := ctx.Values().Get("jwt").(*jwt.Token)
+    claims := user.Claims.(jwt.MapClaims)
+    userID := int(claims["user_id"].(float64))
+
     // Here we should check if the user ID is valid and exists, for simplicity assuming it's valid
     expirationTime := time.Now().Add(10 * time.Minute).Unix()
 

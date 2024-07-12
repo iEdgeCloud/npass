@@ -12,10 +12,13 @@ var jwtHandler *jwt.Middleware
 func main() {
     app := iris.New()
 
+    // Set logger to debug level
+    app.Logger().SetLevel("debug")
+
+    // Log all requests
     app.Use(iris.Logger())
 
-
-    database.InitDB()  // 初始化数据库
+    database.InitDB()
 
     // Initialize JWT middleware
     jwtHandler = jwt.New(jwt.Config{
@@ -29,6 +32,10 @@ func main() {
     app.Post("/api/login", handlers.Login)
     app.Get("/api/config", jwtHandler.Serve, handlers.GetConfig)
 
-    app.Listen(":8080")
+    // Start the server
+    app.Listen(":8080", iris.WithConfiguration(iris.Configuration{
+        DisableStartupLog: false,
+        EnableOptimizations: true,
+    }))
 }
 
