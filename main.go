@@ -3,15 +3,15 @@ package main
 import (
     "github.com/kataras/iris/v12"
     "github.com/kataras/iris/v12/middleware/jwt"
-    "myapp/handlers"
-    "myapp/database"
+    "github.com/iEdgeCloud/npass/handlers"
+    "github.com/iEdgeCloud/npass/database"
 )
 
 var jwtHandler *jwt.Middleware
 
 func main() {
     app := iris.New()
-    database.InitDB()
+    database.InitDB()  // 初始化数据库
 
     // Initialize JWT middleware
     jwtHandler = jwt.New(jwt.Config{

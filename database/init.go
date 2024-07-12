@@ -12,7 +12,7 @@ func InitDB() {
     var err error
     DB, err = sql.Open("sqlite3", "./users.db")
     if err != nil {
-        log.Fatal(err)
+        log.Fatalf("Error opening database: %v\n", err)
     }
 
     createTableQuery := `
@@ -24,7 +24,9 @@ func InitDB() {
 
     _, err = DB.Exec(createTableQuery)
     if err != nil {
-        log.Fatal(err)
+        log.Fatalf("Error creating table: %v\n", err)
+    } else {
+        log.Println("Table created successfully or already exists.")
     }
 }
 

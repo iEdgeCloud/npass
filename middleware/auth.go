@@ -1,7 +1,7 @@
 package middleware
 
 import (
-    "myapp/utils"
+    "utils"
     "github.com/kataras/iris/v12"
 )
 
